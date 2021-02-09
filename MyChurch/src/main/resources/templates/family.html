@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<title>Add Family</title>
+<script type="text/javascript">
+function validate(){
+	var fname= document.getElementById("firstName");
+	var lname= document.getElementById("lastName");
+	var e = document.getElementById("church");
+	var assembly = e.options[e.selectedIndex].value;
+	if (fname.value=="" || lname.value==""){
+		alert("First and last names should be between 1 and 32 characters");
+		return false;
+	}else{
+		true;
+	}
+	if(assembly == "null"){
+		alert("Select an assembly");
+		return false;
+	}
+	else true;
+}
+
+</script>
+</head>
+<body>
+<div class="container">
+	<div th:replace="fragments/header :: header"></div>
+	 <form action="" onsubmit="validate()" th:object="${member}" method="post" >
+	 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+	<div class="card">
+    <div class="card-body">
+    
+    <div class="form-group row" th:if="${family.name==null}">
+    	<h2>Add Family Head</h2>
+    	
+		  <div class="input-group mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="basic-addon1">Family Name</span>
+		  </div>
+		  <input type="text" class="form-control" placeholder="Family name" aria-label="familyName" aria-describedby="basic-addon1" id="familyname" th:field="${family.name}" required="required">
+		</div>
+
+    </div>
+
+    <div class="form-group row" th:if="${family.name!=null}">
+    
+	    <div class="card" style="width: 18rem;">
+	  	<div class="card-header" th:text="|Add members of ${family.name} family|">
+	    Add Family Members
+	  	</div>
+	  <ul class="list-group list-group-flush" th:each="familyMember:${familyMembers}">
+	    <li class="list-group-item" th:text="|${familyMember.title} ${familyMember.firstName} ${familyMember.lastName}|">Cras justo odio</li>
+
+	  </ul>
+		</div>
+    
+
+    	<select hidden=true th:name="fam" id=fam th:field="${member.family.id}">
+    		<option th:each="fam:${family}" th:value="${fam.id}" th:text="${fam.name}"></option>
+    	</select>
+<!--     	<input type="text" id="familyId" value="${family.id}" th:field="${member.family.id}" />  -->
+    </div>
+
+
+<!--     <div th:if="${family.name!=null}" class="form-group row"> -->
+           
+<!--            <button type="button" class="btn btn-primary" th:onclick="|window.location.href='@{/family/{familyId}(familyId=${family.id})}'|"> -->
+<!--            Add Members</button> -->
+<!--     </div> -->
+    <div class="row">
+    
+    	<div class="col-2">
+    		<div class="form-group row">
+		   	<label for="title" style="margin-right: 1em">Title</label>
+			<select th:name="title"  id="title" th:field="${member.title}">
+			  <option th:value="Mr">Mr</option>
+			  <option th:value="Mrs">Mrs</option>
+			  <option th:value="Master">Master</option>
+			  <option th:value="Rev">Rev</option>
+			  <option th:value="Dr">Dr</option>
+			</select>
+    		</div>
+    	</div>
+<!--     	<label>First Name</label>  -->
+<!-- <div th:classappend="${#fields.hasErrors('firstName')} ? 'input-icon right' : ''"> -->
+<!--  <i th:if="${#fields.hasErrors('firstName')}" class="fa fa-exclamation tooltips" data-original-title="please enter a valid first name" data-container="body"></i> -->
+<!--  <input type="text"  class="form-control" maxlength="32" th:field="*{firstName}" placeholder="Between 1 and 32 characters"/> -->
+<!--  <span th:if="${#fields.hasErrors('firstName')}" class="help-block" th:errors="*{firstName}"></span> -->
+<!-- </div> -->
+
+    	<div class="col-5">
+    		<div class="form-group row">
+    		<label for="firstName">First Name</label>
+    		<input type="text"  class="col-12 col-sm-9 col-md-10"  id="firstName" th:name="firstName" th:field="${member.firstName}" />
+    		<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
+    		</div>
+    	</div>
+    	<div class="col-5">
+    		<div class="form-group row">
+    		<label for="lastName">Last Name</label>
+    		<input type="text"  class="col-12 col-sm-9 col-md-10" id="lastName" th:field="${member.lastName}"/>
+    		<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
+    		</div>
+    	</div>
+    </div>
+    
+    <div class="form-group row" style="margin-top: 1em">
+    	<label for="dob" class="col-12 col-sm-3 col-md-2 col-form-label">DOB</label>
+    	<div class="col-12 col-sm-9 col-md-10"> 
+    	<input type="date" class="col-12 col-sm-9 col-md-10" id="dob" name="dob" th:field="${member.dob}"/>
+   	
+    	</div>
+    </div>
+    
+    <div class="form-group row" style="margin-top: 1em">
+    	<label for="email" class="col-12 col-sm-3 col-md-2 col-form-label">Email</label>
+    	<div class="col-12 col-sm-9 col-md-10"> 
+    	<input type="email" class="col-12 col-sm-9 col-md-10" id="email" name="email" th:field="${member.email}"/>
+    	</div>
+    </div>
+    
+    <div class="form-group row" style="margin-top: 1em">
+    	<label for="firstline" class="col-12 col-sm-3 col-md-2 col-form-label">Address First line</label>
+    	<div class="col-12 col-sm-9 col-md-10"> 
+    	<input type="text" class="col-12 col-sm-9 col-md-10" id="firstline" name="firstline" th:field="${family.address.firstLine}"/>
+    	</div>
+    </div>
+    
+    <div class="form-group row" style="margin-top: 1em">
+    	<label for="secondline" class="col-12 col-sm-3 col-md-2 col-form-label">Second line</label>
+    	<div class="col-12 col-sm-9 col-md-10"> 
+    	<input type="text" class="col-12 col-sm-9 col-md-10" id="secondline" name="secondline" th:field="${family.address.secondLine}"/>
+    	</div>
+    </div>
+    
+    <div class="form-group row" style="margin-top: 1em">
+    	<label for="state" class="col-12 col-sm-3 col-md-2 col-form-label">State</label>
+    	<div class="col-12 col-sm-9 col-md-10"> 
+    	<input type="text" class="col-12 col-sm-9 col-md-10" id="state" name="state" th:field="${family.address.state}">
+    	</div>
+    </div>
+    
+    <div class="form-group row" style="margin-top: 1em">
+    	<div class="col-4">
+    	<input type="text" class="col-12 col-sm-9 col-md-10" id="postcode" placeholder="Post code" th:field="${family.address.postCode}"/>
+    	</div>
+    	<div class="col-4">
+    	<div th:replace="fragments/county :: countylist" th:field="${family.address.county}">
+    	<input type="hidden" id="county" th:field="${family.address.county}" />
+    	</div>
+    	</div>
+    	<div class="col-4">
+    	<div th:replace="fragments/country :: countrylist" >
+    	<input type="hidden" id="country" th:field="${family.address.country}" />
+    	</div>
+    	</div>
+    
+    </div>
+    
+    <div class="form-group row" style="margin-top: 1em">
+    	<div class="col-6">
+    	<input type="tel" id="homephone" class="col-12 col-sm-9 col-md-10" name="homephone" placeholder="Home Phone" th:field="${family.address.homePhone}" />
+
+    	</div>
+    	 <div class="col-6">
+    	 <input type="tel" class="col-12 col-sm-9 col-md-10" id="mobile" name="mobile" placeholder="Mobile" th:field="${member.mobile}" />
+
+
+    	</div>
+
+    </div>
+    
+    <div class="form-group row">
+        	 <div class="col-3">
+    	<label for="phoneconsent">Email Consent</label>
+    	<input type="checkbox" id="emailconsent" th:field="${member.consent.email_consent}"/>
+    	</div>
+    	 <div class="col-3">
+    	<label for="phoneconsent">Phone Consent</label>
+    	<input type="checkbox" id="phoneconsent" th:field="${member.consent.phone_consent}"/>
+    	</div>
+    	<div class="col-3">
+    	 <label for="mobileconsent">Mobile Consent</label>
+    	<input type="checkbox" id="mobileconsent" th:field="${member.consent.mobile_consent}">
+    	</div>
+    	 <div class="col-3">
+    	<label for="postalconsent">Postal Consent</label>
+    	<input  type="checkbox" id="postalconsent" th:field="${member.consent.postal_consent}">
+    	</div>
+    </div>
+    
+    <div class="form-group row" style="margin-top: 1em">
+    	<div class="col-6">
+    	<label for="doc" class="col-12 col-sm-3 col-md-2 col-form-label">Date of consent</label>
+    	<div class="col-12 col-sm-9 col-md-10"> 
+    	<input type="date" class="col-12 col-sm-9 col-md-10" id="doc" name="doc" >
+<!--     	th:field="${member.consent.date_consent}" -->
+    	</div>
+    	</div>
+    	<div class="col-6">
+    	
+    	
+    	<div class="col-12 col-sm-9 col-md-10"> 
+ 	
+    	<select th:name="church"  id="church" th:field="${member.assembly.id}" > 
+    		<option value=null>Select Assembly</option>
+			<option th:each="church:${assemblies}" th:value="${church.id}" th:text="${church.name}"/>
+			  
+			</select>
+			
+    	</div>
+    	</div>
+
+    </div>
+
+    <div class="form-group row" style="margin-top: 1em">
+	   
+	    
+
+    
+    </div>
+
+
+    
+    
+
+
+    
+<button th:hidden="${family.name!=null}" type="submit" class="btn btn-success">Save Family</button>
+<button th:hidden="${family.name==null}" type="submit" class="btn btn-success">Save Member</button>
+  </div>
+</div>
+
+  
+	    </form>
+
+
+</div>
+
+</body>
+</html>

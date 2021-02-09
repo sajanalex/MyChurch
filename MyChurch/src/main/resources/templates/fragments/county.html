@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<p th:fragment="headerElement" th:remove="tag">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" 
+crossorigin="anonymous"></script>
+</p>
+
+<!-- List of Counties -->
+
+<div th:fragment="countylist">
+<select id="county" th:name="county" th:field="${family.address.county}">
+		<option th:value=null>Select County</option>
+    <optgroup label="England">
+        <option th:value="'	Bath and North East Somerset	'">	Bath and North East Somerset	</option>
+		<option th:value="'	Bedfordshire	'">	Bedfordshire	</option>
+		<option th:value="'	Berkshire	'">	Berkshire	</option>
+		<option th:value="'	Bristol	'">	Bristol	</option>
+		<option th:value="'	Buckinghamshire	'">	Buckinghamshire	</option>
+		<option th:value="'	Cambridgeshire	'">	Cambridgeshire	</option>
+		<option th:value="'	Cheshire	'">	Cheshire	</option>
+		<option th:value="'	Cornwall	'">	Cornwall	</option>
+		<option th:value="'	County Durham	'">	County Durham	</option>
+		<option th:value="'	Cumbria	'">	Cumbria	</option>
+		<option th:value="'	Derbyshire	'">	Derbyshire	</option>
+		<option th:value="'	Devon	'">	Devon	</option>
+		<option th:value="'	Dorset	'">	Dorset	</option>
+		<option th:value="'	East Riding of Yorkshire	'">	East Riding of Yorkshire	</option>
+		<option th:value="'	East Sussex	'">	East Sussex	</option>
+		<option th:value="'	Essex	'">	Essex	</option>
+		<option th:value="'	Gloucestershire	'">	Gloucestershire	</option>
+		<option th:value="'	Greater London	'">	Greater London	</option>
+		<option th:value="'	Greater Manchester	'">	Greater Manchester	</option>
+		<option th:value="'	Hampshire	'">	Hampshire	</option>
+		<option th:value="'	Herefordshire	'">	Herefordshire	</option>
+		<option th:value="'	Hertfordshire	'">	Hertfordshire	</option>
+		<option th:value="'	Isle of Wight	'">	Isle of Wight	</option>
+		<option th:value="'	Isles of Scilly	'">	Isles of Scilly	</option>
+		<option th:value="'	Kent	'">	Kent	</option>
+		<option th:value="'	Lancashire	'">	Lancashire	</option>
+		<option th:value="'	Leicestershire	'">	Leicestershire	</option>
+		<option th:value="'	Lincolnshire	'">	Lincolnshire	</option>
+		<option th:value="'	Merseyside	'">	Merseyside	</option>
+		<option th:value="'	Norfolk	'">	Norfolk	</option>
+		<option th:value="'	North Somerset	'">	North Somerset	</option>
+		<option th:value="'	North Yorkshire	'">	North Yorkshire	</option>
+		<option th:value="'	Northamptonshire	'">	Northamptonshire	</option>
+		<option th:value="'	Northumberland	'">	Northumberland	</option>
+		<option th:value="'	Nottinghamshire	'">	Nottinghamshire	</option>
+		<option th:value="'	Oxfordshire	'">	Oxfordshire	</option>
+		<option th:value="'	Rutland	'">	Rutland	</option>
+		<option th:value="'	Shropshire	'">	Shropshire	</option>
+		<option th:value="'	Somerset	'">	Somerset	</option>
+		<option th:value="'	South Gloucestershire	'">	South Gloucestershire	</option>
+		<option th:value="'	South Yorkshire	'">	South Yorkshire	</option>
+		<option th:value="'	Staffordshire	'">	Staffordshire	</option>
+		<option th:value="'	Suffolk	'">	Suffolk	</option>
+		<option th:value="'	Surrey	'">	Surrey	</option>
+		<option th:value="'	Tyne & Wear	'">	Tyne & Wear	</option>
+		<option th:value="'	Warwickshire	'">	Warwickshire	</option>
+		<option th:value="'	West Midlands	'">	West Midlands	</option>
+		<option th:value="'	West Sussex	'">	West Sussex	</option>
+		<option th:value="'	West Yorkshire	'">	West Yorkshire	</option>
+		<option th:value="'	Wiltshire	'">	Wiltshire	</option>
+		<option th:value="'	Worcestershire	'">	Worcestershire	</option>
+    </optgroup>
+    <optgroup label="Wales">
+        <option th:value="'	Blaenau Gwent	'">	Blaenau Gwent	</option>
+		<option th:value="'	Bridgend	'">	Bridgend	</option>
+		<option th:value="'	Caerphilly	'">	Caerphilly	</option>
+		<option th:value="'	Cardiff	'">	Cardiff	</option>
+		<option th:value="'	Carmarthenshire	'">	Carmarthenshire	</option>
+		<option th:value="'	Ceredigion	'">	Ceredigion	</option>
+		<option th:value="'	Conwy	'">	Conwy	</option>
+		<option th:value="'	Denbighshire	'">	Denbighshire	</option>
+		<option th:value="'	Flintshire	'">	Flintshire	</option>
+		<option th:value="'	Gwynedd	'">	Gwynedd	</option>
+		<option th:value="'	Isle of Anglesey	'">	Isle of Anglesey	</option>
+		<option th:value="'	Merthyr Tydfil	'">	Merthyr Tydfil	</option>
+		<option th:value="'	Monmouthshire	'">	Monmouthshire	</option>
+		<option th:value="'	Neath Port Talbot.	'">	Neath Port Talbot.	</option>
+		<option th:value="'	Newport	'">	Newport.	</option>
+		<option th:value="'	Pembrokeshire	'">	Pembrokeshire	</option>
+		<option th:value="'	Powy	'">	Powy	</option>
+		<option th:value="'	Rhondda Cynon Taff	'">	Rhondda Cynon Taff	</option>
+		<option th:value="'	Swansea	'">	Swansea	</option>
+		<option th:value="'	Torfaen	'">	Torfaen	</option>
+		<option th:value="'	Vale of Glamorgan	'">	Vale of Glamorgan	</option>
+		<option th:value="'	Wrexham	'">	Wrexham	</option>
+
+    </optgroup>
+    <optgroup label="Scotland">
+        <option th:value="'	Aberdeenshire	'">	Aberdeenshire	</option>
+		<option th:value="'	Angus	'">	Angus	</option>
+		<option th:value="'	Argyll & Bute	'">	Argyll & Bute	</option>
+		<option th:value="'	Ayrshire	'">	Ayrshire	</option>
+		<option th:value="'	Banffshire	'">	Banffshire	</option>
+		<option th:value="'	Berwickshire	'">	Berwickshire	</option>
+		<option th:value="'	Borders	'">	Borders	</option>
+		<option th:value="'	Caithness	'">	Caithness	</option>
+		<option th:value="'	Clackmannanshire	'">	Clackmannanshire	</option>
+		<option th:value="'	Dumfries & Galloway	'">	Dumfries & Galloway	</option>
+		<option th:value="'	Dunbartonshire	'">	Dunbartonshire	</option>
+		<option th:value="'	East Ayrshire	'">	East Ayrshire	</option>
+		<option th:value="'	East Dunbartonshire	'">	East Dunbartonshire	</option>
+		<option th:value="'	East Lothian	'">	East Lothian	</option>
+		<option th:value="'	East Renfrewshire	'">	East Renfrewshire	</option>
+		<option th:value="'	Fife	'">	Fife	</option>
+		<option th:value="'	Highland	'">	Highland	</option>
+		<option th:value="'	Inverclyde	'">	Inverclyde	</option>
+		<option th:value="'	Kincardineshire	'">	Kincardineshire	</option>
+		<option th:value="'	Lanarkshire	'">	Lanarkshire	</option>
+		<option th:value="'	Midlothian	'">	Midlothian	</option>
+		<option th:value="'	Moray	'">	Moray	</option>
+		<option th:value="'	North Ayrshire	'">	North Ayrshire	</option>
+		<option th:value="'	North Lanarkshire	'">	North Lanarkshire	</option>
+		<option th:value="'	Orkney	'">	Orkney	</option>
+		<option th:value="'	Perth & Kinross	'">	Perth & Kinross	</option>
+		<option th:value="'	Renfrewshire	'">	Renfrewshire	</option>
+		<option th:value="'	Shetland	'">	Shetland	</option>
+		<option th:value="'	South Ayrshire	'">	South Ayrshire	</option>
+		<option th:value="'	South Lanarkshire	'">	South Lanarkshire	</option>
+		<option th:value="'	Stirlingshire	'">	Stirlingshire	</option>
+		<option th:value="'	West Dunbartonshire	'">	West Dunbartonshire	</option>
+		<option th:value="'	West Lothian	'">	West Lothian	</option>
+		<option th:value="'	Western Isles	'">	Western Isles	</option>
+
+    </optgroup>
+    <optgroup label="Northern Ireland">
+        <option th:value="'	Antrim'">	Antrim	</option>
+		<option th:value="'	Armagh'">	Armagh	</option>
+		<option th:value="'	Down'">	Down	</option>
+		<option th:value="'	Fermanagh'">	Fermanagh	</option>
+		<option th:value="'	Londonderry'">	Londonderry	</option>
+		<option th:value="'	Tyrone'">	Tyrone	</option>
+
+    </optgroup>
+</select>
+</div>
+</body>
+</html>

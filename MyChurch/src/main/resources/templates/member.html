@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<title>Member</title>
+</head>
+<body>
+<div class="container">
+<div th:replace="fragments/header :: header"></div>
+
+<form th:action="@{/member/${family.id}}" method="post">
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+<label>Enter Family Id</label>
+<input type="text" th:name="familyId" id="familyId" th:field="${family.id}"/>
+<button type="submit">View Members</button>
+</form>
+
+
+
+<div th:if="${members!=null}">
+<ul th:each="fmember:${members}">
+<li th:text="${fmember.firstName}"></li>
+</ul>
+</div>
+
+<!-- <div th:if="${family.id==null}"> -->
+<!-- <label>Enter Family Id</label> -->
+<!-- <input type="text" th:name="familyId" id="familyId" th:field="${family.id}"/> -->
+<!-- <a th:href="@{/member/2}">View Members</a> -->
+<!-- </div> -->
+
+
+
+</div>
+
+</body>
+</html>
